@@ -2,7 +2,9 @@
 
 namespace Xaav\QueueBundle\JobQueue;
 
-class JobQueueInterface
+interface JobQueueInterface
 {
+    public function getNextJob();
 
+    public function queueJob();
 }
