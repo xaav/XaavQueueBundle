@@ -15,7 +15,7 @@ class Job
     /**
      * @orm:Column(type="string", length="1000")
      */
-    protected $name;
+    protected $callable;
 
     /**
      * @orm:ManyToOne(targetEntity="JobQueue", inversedBy="Job")
