@@ -1,5 +1,7 @@
 <?php
 
+namespace Xaav\QueueBundle\Entity;
+
 /**
  * @orm:Entity
  */
