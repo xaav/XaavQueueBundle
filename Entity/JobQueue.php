@@ -19,4 +19,14 @@ class JobQueue
       * @orm:OneToMany(targetEntity="Job", mappedBy="JobQueue")
       */
      protected $jobs;
+
+    public function getJob()
+    {
+
+    }
+
+    public function addJob()
+    {
+
+    }
 }

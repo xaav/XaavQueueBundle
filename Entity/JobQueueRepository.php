@@ -6,13 +6,4 @@ use Doctrine\ORM\EntityRepository;
 
 class JobQueueRepository extends EntityRepository
 {
-    public function getJob()
-    {
-
-    }
-
-    public function addJob()
-    {
-
-    }
 }
