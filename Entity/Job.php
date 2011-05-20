@@ -21,4 +21,10 @@ class Job
      * @orm:ManyToOne(targetEntity="JobQueue", inversedBy="Job")
      */
     protected $jobQueue;
+
+    public function execute()
+    {
+        $callable = unserialize($this->callable);
+        $callable->call();
+    }
 }
