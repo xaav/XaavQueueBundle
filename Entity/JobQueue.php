@@ -22,11 +22,14 @@ class JobQueue
 
     public function getJob()
     {
+        $job = $this->jobs->last();
+        $this->jobs->removeElement($job);
 
+        return $job;
     }
 
-    public function addJob()
+    public function addJob(Job $job)
     {
-
+        $this->jobs->add($job);
     }
 }
