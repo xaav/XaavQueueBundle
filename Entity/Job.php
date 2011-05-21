@@ -26,7 +26,7 @@ class Job
      */
     protected $jobQueue;
 
-    public function execute()
+    public function executeJob()
     {
         $callable = unserialize($this->callable);
 
@@ -36,5 +36,10 @@ class Job
         else {
             throw new \InvalidArgumentException(gettype($callable).' does not implement JobCallableInterface');
         }
+    }
+
+    public function setJobCallable(JobCallableInterface $callable)
+    {
+        $this->callable = serialize($callable);
     }
 }
