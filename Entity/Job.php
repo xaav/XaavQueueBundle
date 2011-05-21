@@ -2,6 +2,8 @@
 
 namespace Xaav\QueueBundle\Entity;
 
+use Xaav\QueueBundle\JobQueue\JobCallableInterface;
+
 /**
  * @orm:Entity
  */
@@ -27,6 +29,12 @@ class Job
     public function execute()
     {
         $callable = unserialize($this->callable);
-        $callable->call();
+
+        if($callable instanceof JobCallableInterface) {
+            $callable->call();
+        }
+        else {
+            throw new \InvalidArgumentException(gettype($callable).' does not implement JobCallableInterface');
+        }
     }
 }
