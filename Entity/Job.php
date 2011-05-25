@@ -15,7 +15,7 @@ class Job
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-     protected $id;
+    protected $id;
 
     /**
      * @ORM\Column(type="string", length="1000")
@@ -29,12 +29,12 @@ class Job
 
     public function getJobCallable()
     {
-        return unserialize($this->callable);
+        return unserialize($this->getCallable());
     }
 
     public function setJobCallable(JobCallableInterface $callable)
     {
-        $this->callable = serialize($callable);
+        $this->setCallable(serialize($callable));
     }
 
     /**

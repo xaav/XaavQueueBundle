@@ -23,21 +23,14 @@ class JobQueue
 
     public function getJob()
     {
-        $job = $this->jobs->last();
-        $this->jobs->removeElement($job);
-
-        return $job;
+        return array_pop($this->jobs);
     }
 
-    public function addJob(Job $job)
-    {
-        $this->jobs->add($job);
-    }
     public function __construct()
     {
         $this->jobs = new \Doctrine\Common\Collections\ArrayCollection();
     }
-    
+
     /**
      * Get id
      *
