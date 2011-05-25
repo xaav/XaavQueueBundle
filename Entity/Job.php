@@ -27,16 +27,9 @@ class Job
      */
     protected $jobQueue;
 
-    public function executeJob()
+    public function getJobCallable()
     {
-        $callable = unserialize($this->callable);
-
-        if($callable instanceof JobCallableInterface) {
-            $callable->call();
-        }
-        else {
-            throw new \InvalidArgumentException(gettype($callable).' does not implement JobCallableInterface');
-        }
+        return unserialize($this->callable);
     }
 
     public function setJobCallable(JobCallableInterface $callable)
