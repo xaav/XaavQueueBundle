@@ -2,21 +2,22 @@
 
 namespace Xaav\QueueBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
 /**
- * @orm:Entity
- * @orm:Table(name="table")
+ * @ORM\Entity()
  */
 class JobQueue
 {
     /**
-     * @orm:Id
-     * @orm:Column(type="integer")
-     * @orm:GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
      protected $id;
 
      /**
-      * @orm:OneToMany(targetEntity="Job", mappedBy="JobQueue")
+      * @ORM\OneToMany(targetEntity="Job", mappedBy="JobQueue")
       */
      protected $jobs;
 

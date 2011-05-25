@@ -3,26 +3,27 @@
 namespace Xaav\QueueBundle\Entity;
 
 use Xaav\QueueBundle\JobQueue\JobCallableInterface;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @orm:Entity
+ * @ORM\Entity()
  */
 class Job
 {
     /**
-     * @orm:Id
-     * @orm:Column(type="integer")
-     * @orm:GeneratedValue(strategy="AUTO")
+     * @ORM\Id
+     * @ORM\Column(type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
      protected $id;
 
     /**
-     * @orm:Column(type="string", length="1000")
+     * @ORM\Column(type="string", length="1000")
      */
     protected $callable;
 
     /**
-     * @orm:ManyToOne(targetEntity="JobQueue", inversedBy="Job")
+     * @ORM\ManyToOne(targetEntity="JobQueue", inversedBy="Job")
      */
     protected $jobQueue;
 
