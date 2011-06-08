@@ -21,6 +21,9 @@ class JobQueue
       */
      protected $jobs;
 
+    /**
+     * Get a Job
+     */
     public function getJob()
     {
         return array_pop($this->jobs);
