@@ -38,11 +38,13 @@ class Job
 
     public function execute()
     {
-        if($this->callable instanceof JobCallableInterface){
-            $this->callable->call();
+        $callable = unserialize($this->callable);
+
+        if($callable instanceof JobCallableInterface){
+            $callable->call();
         }
         else {
-            throw new InvalidCallableException($this->callable);
+            throw new InvalidCallableException($callable);
         }
     }
 
