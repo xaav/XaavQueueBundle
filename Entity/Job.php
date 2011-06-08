@@ -2,6 +2,7 @@
 
 namespace Xaav\QueueBundle\Entity;
 
+use Xaav\QueueBundle\Exception\InvalidCallableException;
 use Xaav\QueueBundle\JobQueue\JobCallableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -27,14 +28,22 @@ class Job
      */
     protected $jobQueue;
 
-    public function getJobCallable()
+    public function __construct(JobCallableInterface $callable = null)
     {
-        return unserialize($this->getCallable());
+        if ($callable){
+
+            $this->callable = serialize($callable);
+        }
     }
 
-    public function setJobCallable(JobCallableInterface $callable)
+    public function execute()
     {
-        $this->setCallable(serialize($callable));
+        if($this->callable instanceof JobCallableInterface){
+            $this->callable->call();
+        }
+        else {
+            throw new InvalidCallableException($this->callable);
+        }
     }
 
     /**
