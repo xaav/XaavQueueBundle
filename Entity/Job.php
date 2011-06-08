@@ -7,7 +7,7 @@ use Xaav\QueueBundle\JobQueue\JobCallableInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Xaav\QueueBundle\Entity\JobRepository")
  */
 class Job
 {

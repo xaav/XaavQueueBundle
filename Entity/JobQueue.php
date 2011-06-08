@@ -5,7 +5,7 @@ namespace Xaav\QueueBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Xaav\QueueBundle\Entity\JobQueueRepository")
  */
 class JobQueue
 {
