@@ -29,6 +29,11 @@ class JobQueue
         return array_pop($this->jobs);
     }
 
+    public function addJob(Job $job)
+    {
+        return array_push($this->jobs, $job);
+    }
+
     public function __construct()
     {
         $this->jobs = new \Doctrine\Common\Collections\ArrayCollection();
