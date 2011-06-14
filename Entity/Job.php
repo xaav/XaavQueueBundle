@@ -2,6 +2,7 @@
 
 namespace Xaav\QueueBundle\Entity;
 
+use Xaav\QueueBundle\JobQueue\JobInterface;
 use Xaav\QueueBundle\Exception\InvalidCallableException;
 use Xaav\QueueBundle\JobQueue\JobCallableInterface;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Xaav\QueueBundle\Entity\JobRepository")
  */
-class Job
+class Job implements JobInterface
 {
     /**
      * @ORM\Id

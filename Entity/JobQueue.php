@@ -2,12 +2,13 @@
 
 namespace Xaav\QueueBundle\Entity;
 
+use Xaav\QueueBundle\JobQueue\JobQueueInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Xaav\QueueBundle\Entity\JobQueueRepository")
  */
-class JobQueue
+class JobQueue implements JobQueueInterface
 {
     /**
      * @ORM\Id
