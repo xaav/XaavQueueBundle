@@ -20,6 +20,11 @@ class Job implements JobInterface
         $this->callable = $message;
     }
 
+    public function getCallable()
+    {
+        return $this->callable;
+    }
+
     public function execute()
     {
         $callable = unserialize($this->callable);

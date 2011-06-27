@@ -2,6 +2,8 @@
 
 namespace Xaav\QueueBundle\AMQP;
 
+use Xaav\QueueBundle\JobQueue\Provider\AMQPProvider;
+
 use Xaav\QueueBundle\JobQueue\JobQueueInterface;
 
 class JobQueue implements JobQueueInterface
@@ -15,6 +17,8 @@ class JobQueue implements JobQueueInterface
      */
     protected $routingKey;
     protected $exchangeName;
+
+    protected $initialized;
 
     public function setRoutingKey($routingKey)
     {
@@ -41,13 +45,48 @@ class JobQueue implements JobQueueInterface
         $this->connection = $connection;
     }
 
+    protected function initialize()
+    {
+        if(!$this->initialized) {
+            if(!$this->connection->isConnected) {
+
+                $this->connection->connect();
+            }
+
+            $ex = new AMQPExchange($this->connection);
+            $ex->declare($this->getExchangeName(), AMQP_EX_TYPE_FANOUT);
+
+            $q = new AMQPQueue($this->connection);
+            $q->declare(rand());
+            $q->bind($this->getExchangeName(), $this->getRoutingKey());
+
+            $this->queue = $q;
+            $this->exchange = $ex;
+        }
+    }
+
+    protected function publish($message)
+    {
+        $this->exchange->publish($message, $this->getRoutingKey());
+    }
+
+    protected function get()
+    {
+        return $this->queue->get();
+    }
+
     public function addJob(Job $job)
     {
-        //
+        $this->initialize();
+        $this->publish($job->getCallable());
     }
 
     public function getJob()
     {
+        $this->initialize();
+        $job = new Job();
+        $job->setCallable($this->get());
 
+        return $job;
     }
 }
