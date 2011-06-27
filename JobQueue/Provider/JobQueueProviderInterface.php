@@ -10,6 +10,4 @@ interface JobQueueProviderInterface
      * @return JobQueueInterface
      */
     public function getJobQueueByName($name);
-
-    public function createQueue(JobQueueInterface $queue);
 }
