@@ -6,22 +6,39 @@ use Xaav\QueueBundle\JobQueue\JobQueueInterface;
 
 class JobQueue implements JobQueueInterface
 {
+    protected $exchange;
     protected $queue;
-    protected $name;
+    protected $connection;
 
-    public function setName($name)
+    /**
+     * The routing key
+     */
+    protected $routingKey;
+    protected $exchangeName;
+
+    public function setRoutingKey($routingKey)
     {
-        $this->name = $name;
+        $this->routingKey = $routingKey;
     }
 
-    public function getName()
+    public function getRoutingKey()
     {
-        return $this->name;
+        return $this->routingKey;
     }
 
-    public function __construct(\AMQPQueue $queue = null)
+    public function setExchangeName($exchangeName)
     {
-        $this->queue = $queue;
+        $this->exchangeName = $exchangeName;
+    }
+
+    public function getExchangeName()
+    {
+        return $this->exchangeName;
+    }
+
+    public function __construct(\AMQPConnection $connection = null)
+    {
+        $this->connection = $connection;
     }
 
     public function addJob(Job $job)
@@ -31,10 +48,6 @@ class JobQueue implements JobQueueInterface
 
     public function getJob()
     {
-        $message = $this->queue->consume();
-        $job = new Job();
-        $job->setCallable($message);
 
-        return $job;
     }
 }
