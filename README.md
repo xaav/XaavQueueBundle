@@ -22,7 +22,7 @@ The use of a batch queue gives these benefits:
 Add the following to your `deps` file:
 
     [XaavQueueBundle]
-        git=git://github.com/xaav/QueueBundle.git
+        git=git://github.com/xaav/XaavQueueBundle.git
         target=/bundles/Xaav/QueueBundle
 
 Run the vendors script:
