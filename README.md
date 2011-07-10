@@ -21,7 +21,7 @@ The use of a batch queue gives these benefits:
 
 Add the following to your `deps` file:
 
-    [FOSUserBundle]
+    [XaavQueueBundle]
         git=git://github.com/xaav/QueueBundle.git
         target=/bundles/Xaav/QueueBundle
 
