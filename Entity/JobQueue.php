@@ -27,12 +27,15 @@ class JobQueue implements JobQueueInterface
      */
     public function getJob()
     {
-        return array_pop($this->jobs);
+        $job = $this->jobs->first();
+        $this->jobs->remove($this->jobs->key());
+
+        return $job;
     }
 
     public function addJob(Job $job)
     {
-        return array_push($this->jobs, $job);
+        $this->jobs->add($job);
     }
 
     public function __construct()
