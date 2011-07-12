@@ -2,6 +2,8 @@
 
 namespace Xaav\QueueBundle\JobQueue\JobQueue;
 
+use Xaav\QueueBundle\JobQueue\Job\JobInterface;
+
 interface JobQueueInterface
 {
     /**
