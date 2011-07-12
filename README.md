@@ -29,6 +29,10 @@ Run the vendors script:
 
     php bin/vendors install
 
+## Contributing ##
+
+If you believe this bundle helped you in some way, please send a pull request, as right now I am the only one maintaining 
+this bundle. 
 
 **See [The wiki][1] for more details**
 
