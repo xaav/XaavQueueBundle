@@ -2,45 +2,35 @@
 
 namespace Xaav\QueueBundle\Entity;
 
-use Xaav\QueueBundle\JobQueue\JobQueueInterface;
+use Xaav\QueueBundle\JobQueue\JobQueue\JobQueueInterface;
+use Xaav\QueueBundle\JobQueue\JobQueue\AbstractJobQueue;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Xaav\QueueBundle\Entity\JobQueueRepository")
  */
-class JobQueue implements JobQueueInterface
+class JobQueue extends AbstractJobQueue implements JobQueueInterface
 {
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-     protected $id;
-
-     /**
-      * @ORM\OneToMany(targetEntity="Job", mappedBy="JobQueue")
-      */
-     protected $jobs;
+    protected $id;
 
     /**
-     * Get a Job
+     * @ORM\Column(type="string")
      */
-    public function getJob()
-    {
-        $job = $this->jobs->first();
-        $this->jobs->remove($this->jobs->key());
+    protected $jobs;
 
-        return $job;
+    protected function getJobs()
+    {
+        return unserialize($this->jobs);
     }
 
-    public function addJob(Job $job)
+    protected function setJobs($jobs)
     {
-        $this->jobs->add($job);
-    }
-
-    public function __construct()
-    {
-        $this->jobs = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->jobs = serialize($jobs);
     }
 
     /**
@@ -51,25 +41,5 @@ class JobQueue implements JobQueueInterface
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Add jobs
-     *
-     * @param Xaav\QueueBundle\Entity\Job $jobs
-     */
-    public function addJobs(\Xaav\QueueBundle\Entity\Job $jobs)
-    {
-        $this->jobs[] = $jobs;
-    }
-
-    /**
-     * Get jobs
-     *
-     * @return Doctrine\Common\Collections\Collection $jobs
-     */
-    public function getJobs()
-    {
-        return $this->jobs;
     }
 }
