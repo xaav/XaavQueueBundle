@@ -32,9 +32,11 @@ Run the vendors script:
 ## Contributing ##
 
 If you believe this bundle helped you in some way, please send a pull request, as right now I am the only one maintaining 
-this bundle. 
+this bundle. If you aren't sure what to do, just look at some of the [issues][3], and fix the ones you can. If we all 
+contribute something to this, we might get a decent Job Queue Bundle for everyone!
 
 **See [The wiki][1] for more details**
 
-[1]: https://github.com/xaav/QueueBundle/wiki 
+[1]: https://github.com/xaav/XaavQueueBundle/wiki 
 [2]: http://en.wikipedia.org/wiki/Job_queue
+[3]: https://github.com/xaav/XaavQueueBundle/issues
