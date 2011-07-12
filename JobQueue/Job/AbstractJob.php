@@ -15,8 +15,5 @@ abstract class AbstractJob implements JobInterface
         $this->count++;
     }
 
-    protected function process($count)
-    {
-        //
-    }
+    abstract protected function process($count);
 }
