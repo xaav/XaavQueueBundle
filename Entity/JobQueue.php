@@ -40,7 +40,13 @@ class JobQueue extends AbstractJobQueue implements JobQueueInterface
 
     protected function getJobs()
     {
-        return unserialize($this->jobs);
+        if($jobs = unserialize($this->jobs)) {
+
+            return $jobs;
+        } else {
+
+            return array();
+        }
     }
 
     protected function setJobs($jobs)
