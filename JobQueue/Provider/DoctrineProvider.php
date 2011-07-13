@@ -25,7 +25,23 @@ class DoctrineProvider implements JobQueueProviderInterface
         }
         else {
 
-            return new JobQueue();
+            $queue = new JobQueue();
+            $queue->setName($name);
+
+            $this->entityManager->persist($queue);
+
+            return $queue;
+        }
+    }
+
+    public function __destruct()
+    {
+        try {
+            $this->entityManager->flush();
+        }
+        catch (\Exception $ex)
+        {
+            //Throwing an exception will cause bad things!
         }
     }
 }
