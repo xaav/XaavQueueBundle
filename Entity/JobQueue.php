@@ -19,9 +19,24 @@ class JobQueue extends AbstractJobQueue implements JobQueueInterface
     protected $id;
 
     /**
+     * @ORM\Column(type="string", unique=true)
+     */
+    protected $name;
+
+    /**
      * @ORM\Column(type="string")
      */
     protected $jobs;
+
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
     protected function getJobs()
     {
