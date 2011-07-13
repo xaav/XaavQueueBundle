@@ -16,7 +16,7 @@ class DoctrineProvider implements JobQueueProviderInterface
     public function getJobQueueByName($name)
     {
         $result = $this->entityManager
-                       ->getRepository('XaavJobQueueBundle:JobQueue')
+                       ->getRepository('XaavQueueBundle:JobQueue')
                        ->findOneByName($name);
 
         if($result) {
