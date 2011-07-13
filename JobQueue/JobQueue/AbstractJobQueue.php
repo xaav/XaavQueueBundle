@@ -6,9 +6,17 @@ use Xaav\QueueBundle\JobQueue\Job\JobInterface;
 
 abstract class AbstractJobQueue implements JobQueueInterface
 {
-    abstract protected function setJobs($jobs);
+    protected $jobs;
 
-    abstract protected function getJobs();
+    protected function setJobs($jobs)
+    {
+        $this->jobs = $jobs;
+    }
+
+    protected function getJobs()
+    {
+        return $this->jobs;
+    }
 
     protected function addJob($job)
     {
