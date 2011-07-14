@@ -16,7 +16,7 @@ class JobQueue extends AbstractJobQueue implements JobQueueInterface
 
     protected function getJobs()
     {
-        return file_get_contents($this->location);
+        return @file_get_contents($this->location);
     }
 
     protected function setJobs($jobs)
