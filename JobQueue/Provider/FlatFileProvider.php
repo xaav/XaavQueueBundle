@@ -15,6 +15,6 @@ class FlatFileProvider implements JobQueueProviderInterface
 
     public function getJobQueueByName($name)
     {
-        return new JobQueue($name.'/'.$name.'.jobqueue');
+        return new JobQueue($this->directory.'/'.$name.'.jobqueue');
     }
 }

@@ -16,11 +16,16 @@ class JobQueue extends AbstractJobQueue implements JobQueueInterface
 
     protected function getJobs()
     {
-        return @file_get_contents($this->location);
+        if(is_array($jobs = @unserialize(file_get_contents($this->location)))) {
+           return $jobs;
+        }
+        else {
+            return array();
+        }
     }
 
     protected function setJobs($jobs)
     {
-        file_put_contents($this->location, $jobs);
+        @file_put_contents($this->location, serialize($jobs));
     }
 }
