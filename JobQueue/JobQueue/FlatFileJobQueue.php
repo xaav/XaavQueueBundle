@@ -1,9 +1,6 @@
 <?php
 
-namespace Xaav\QueueBundle\FlatFile;
-
-use Xaav\QueueBundle\JobQueue\JobQueue\AbstractJobQueue;
-use Xaav\QueueBundle\JobQueue\JobQueue\JobQueueInterface;
+namespace Xaav\QueueBundle\JobQueue\JobQueue;
 
 class JobQueue extends AbstractJobQueue implements JobQueueInterface
 {
