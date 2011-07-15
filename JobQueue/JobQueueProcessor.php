@@ -7,6 +7,7 @@ use Xaav\QueueBundle\JobQueue\Provider\JobQueueProviderInterface;
 class JobQueueProcessor implements JobQueueProcessorInterface
 {
     protected $provider;
+    protected $cache;
 
     public function __construct(JobQueueProviderInterface $provider)
     {
@@ -15,7 +16,9 @@ class JobQueueProcessor implements JobQueueProcessorInterface
 
     public function process($queueName)
     {
-        $jobqueue = $this->provider->getJobQueueByName($queueName);
+        if(!$jobqueue = $this->cache[$queueName]) {
+            $jobqueue = $this->cache[$queueName] = $this->provider->getJobQueueByName($queueName);
+        }
         $job = $jobqueue->getJobFromQueue();
 
         if($job) {
