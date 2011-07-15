@@ -2,11 +2,7 @@
 
 namespace Xaav\QueueBundle\AMQP;
 
-use Xaav\QueueBundle\JobQueue\Provider\AMQPProvider;
-
-use Xaav\QueueBundle\JobQueue\JobQueueInterface;
-
-class JobQueue implements JobQueueInterface
+class AMQPJobQueue implements JobQueueInterface
 {
     protected $exchange;
     protected $queue;
