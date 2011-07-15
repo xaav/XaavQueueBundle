@@ -2,6 +2,9 @@
 
 namespace Xaav\QueueBundle\AMQP;
 
+use Xaav\QueueBundle\Exception\InvalidCallableException;
+use Xaav\QueueBundle\JobQueue\Job\JobInterface;
+
 class AMQPJobQueue implements JobQueueInterface
 {
     protected $exchange;
@@ -63,26 +66,29 @@ class AMQPJobQueue implements JobQueueInterface
 
     protected function publish($message)
     {
+        $this->initialize();
         $this->exchange->publish($message, $this->getRoutingKey());
     }
 
     protected function get()
     {
+        $this->initialize();
         return $this->queue->get();
     }
 
-    public function addJob(Job $job)
+    public function addJobToQueue(JobInterface $job)
     {
-        $this->initialize();
-        $this->publish($job->getCallable());
+        $this->publish(serialize($job));
     }
 
-    public function getJob()
+    public function getJobFromQueue()
     {
-        $this->initialize();
-        $job = new Job();
-        $job->setCallable($this->get());
+        $job = unserialize($this->get());
 
-        return $job;
+        if($job instanceof JobInterface) {
+            return $job;
+        } else {
+            throw new InvalidCallableException($job);
+        }
     }
 }
