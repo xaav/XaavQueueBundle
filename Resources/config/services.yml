@@ -1,2 +1,10 @@
 services:
-#TODO: Write some services!
+  xaav.jobqueue.provider.amqp:
+    class: Xaav\QueueBundle\JobQueue\Provider\AMQPProvider
+    params: []
+  xaav.jobqueue.provider.doctrine:
+    class: Xaav\QueueBundle\JobQueue\Provider\DoctrineProvider
+    params: []
+  xaav.jobqueue.provider.flatfile:
+    class: Xaav\QueueBundle\JobQueue\Provider\FlatFileProvider
+    params: []
