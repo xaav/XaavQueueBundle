@@ -23,6 +23,7 @@ class JobQueueProcessor implements JobQueueProcessorInterface
 
         if($job) {
             //Job exists
+
             if(!$job->pass()) {
                 //Job is not done!
                 $jobqueue->addJobToQueue($job);
