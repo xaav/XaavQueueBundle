@@ -2,7 +2,7 @@
 
 namespace Xaav\QueueBundle\JobQueue\Provider;
 
-use Xaav\QueueBundle\FlatFile\JobQueue;
+use Xaav\QueueBundle\JobQueue\JobQueue\FlatFileJobQueue;
 
 class FlatFileProvider implements JobQueueProviderInterface
 {
@@ -15,6 +15,6 @@ class FlatFileProvider implements JobQueueProviderInterface
 
     public function getJobQueueByName($name)
     {
-        return new JobQueue($this->directory.'/'.$name.'.jobqueue');
+        return new FlatFileJobQueue($this->directory.'/'.$name.'.jobqueue');
     }
 }

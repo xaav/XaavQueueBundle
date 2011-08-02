@@ -2,7 +2,7 @@
 
 namespace Xaav\QueueBundle\JobQueue\JobQueue;
 
-class JobQueue extends AbstractJobQueue implements JobQueueInterface
+class FlatFileJobQueue extends AbstractJobQueue implements JobQueueInterface
 {
     protected $location;
 
