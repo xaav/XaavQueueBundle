@@ -7,7 +7,7 @@ use Xaav\QueueBundle\JobQueue\JobQueue\JobQueueInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="Xaav\QueueBundle\Entity\JobQueueRepository")
+ * @ORM\Entity()
  */
 class JobQueue extends DoctrineJobQueue implements JobQueueInterface
 {
@@ -24,9 +24,14 @@ class JobQueue extends DoctrineJobQueue implements JobQueueInterface
     protected $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\OneToMany(targetEntity="SerializedJob")
      */
-    protected $jobs;
+    protected $serializedJobs;
+
+    public function __construct()
+    {
+    	$this->serializedJobs = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function getName()
     {

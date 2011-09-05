@@ -2,21 +2,30 @@
 
 namespace Xaav\QueueBundle\JobQueue\JobQueue;
 
-class DoctrineJobQueue extends AbstractJobQueue implements JobQueueInterface
+use Xaav\QueueBundle\Entity\SerializedJob;
+use Xaav\QueueBundle\JobQueue\Job\JobInterface;
+use Doctrine\Common\Collections\ArrayCollection;
+
+class DoctrineJobQueue implements JobQueueInterface
 {
-    protected function getJobs()
+	/**
+	 * @var ArrayCollection
+	 */
+	protected $serializedJobs;
+
+    public function getJobFromQueue()
     {
-        if($jobs = base64_decode(unserialize($this->jobs))) {
+    	$serializedJob = $this->serializedJobs->last();
+    	$this->serializedJobs->remove($this->serializedJobs->key());
 
-            return $jobs;
-        } else {
-
-            return array();
-        }
+    	return unserialize($serializedJob->getData());
     }
 
-    protected function setJobs($jobs)
+    public function addJobToQueue(JobInterface $job)
     {
-        $this->jobs = base64_encode(serialize($jobs));
+    	$serializedJob = new SerializedJob();
+    	$serializedJob->setData(serialize($job));
+
+    	$this->serializedJobs->add($serializedJob);
     }
 }
