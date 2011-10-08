@@ -24,7 +24,7 @@ class JobQueue extends DoctrineJobQueue implements JobQueueInterface
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="SerializedJob")
+     * @ORM\OneToMany(targetEntity="SerializedJob", mappedBy="jobQueue")
      */
     protected $serializedJobs;
 

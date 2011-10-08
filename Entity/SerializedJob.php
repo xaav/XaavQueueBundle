@@ -21,6 +21,11 @@ class SerializedJob
 	 */
 	protected $data;
 
+	/**
+	 * ORM\ManyToOne(targetEntity="jobQueue", mappedBy="serializedJobs")
+	 */
+	protected $jobQueue;
+
 	public function setData($data)
 	{
 		$this->data = $data;
