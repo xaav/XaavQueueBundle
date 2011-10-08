@@ -22,9 +22,19 @@ class SerializedJob
 	protected $data;
 
 	/**
-	 * ORM\ManyToOne(targetEntity="jobQueue", mappedBy="serializedJobs")
+	 * @ORM\ManyToOne(targetEntity="JobQueue")
 	 */
 	protected $jobQueue;
+
+	public function getJobQueue()
+	{
+		return $this->jobQueue;
+	}
+
+	public function setJobQueue(JobQueue $jobQueue)
+	{
+		$this->jobQueue = $jobQueue;
+	}
 
 	public function setData($data)
 	{

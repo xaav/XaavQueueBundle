@@ -1,10 +1,4 @@
 services:
-  xaav.jobqueue.provider.amqp:
-    class: Xaav\QueueBundle\JobQueue\Provider\AMQPProvider
-    arguments: []
-  xaav.jobqueue.provider.doctrine:
-    class: Xaav\QueueBundle\JobQueue\Provider\DoctrineProvider
-    arguments: [@doctrine.orm.entity_manager]
-  xaav.jobqueue.provider.flatfile:
-    class: Xaav\QueueBundle\JobQueue\Provider\FlatFileProvider
-    arguments: [%kernel.cache_dir%]
+  xaav.jobqueue.processor:
+    class: Xaav\QueueBundle\JobQueue\JobQueueProcessor
+    arguments: [ @xaav.jobqueue.provider ]

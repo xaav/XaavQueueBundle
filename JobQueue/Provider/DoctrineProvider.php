@@ -2,46 +2,34 @@
 
 namespace Xaav\QueueBundle\JobQueue\Provider;
 
+use Doctrine\ORM\EntityManager;
 use Xaav\QueueBundle\Entity\JobQueue;
 
 class DoctrineProvider implements JobQueueProviderInterface
 {
     protected $entityManager;
 
-    public function __construct($entityManager)
+    public function __construct(EntityManager $entityManager)
     {
         $this->entityManager = $entityManager;
     }
 
     public function getJobQueueByName($name)
     {
-        $result = $this->entityManager
+        $queue = $this->entityManager
                        ->getRepository('XaavQueueBundle:JobQueue')
                        ->findOneByName($name);
 
-        if($result) {
-
-            return $result;
-        }
-        else {
+        if(!$queue) {
 
             $queue = new JobQueue();
             $queue->setName($name);
 
             $this->entityManager->persist($queue);
+        }
 
-            return $queue;
-        }
-    }
+        $queue->setEntityManager($this->entityManager);
 
-    public function __destruct()
-    {
-        try {
-            $this->entityManager->flush();
-        }
-        catch (\Exception $ex)
-        {
-            //Throwing an exception will cause bad things!
-        }
+        return $queue;
     }
 }
