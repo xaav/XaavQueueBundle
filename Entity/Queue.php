@@ -2,15 +2,13 @@
 
 namespace Xaav\QueueBundle\Entity;
 
-use Doctrine\ORM\EntityManager;
 use Xaav\QueueBundle\Queue\Job\JobInterface;
-use Xaav\QueueBundle\Queue\QueueInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
  */
-class Queue implements QueueInterface
+class Queue
 {
     /**
      * @ORM\Id
@@ -28,11 +26,6 @@ class Queue implements QueueInterface
      * @ORM\OneToMany(targetEntity="SerializedJob", mappedBy="queue")
      */
     protected $serializedJobs;
-
-    /**
-     * @var EntityManager
-     */
-    protected $entityManager;
 
     /**
      * Constructor
@@ -69,41 +62,18 @@ class Queue implements QueueInterface
     }
 
     /**
-     * Set Entity Manager
-     */
-    public function setEntityManager(EntityManager $entityManager)
+    * Add serializedJobs
+    */
+    public function addSerializedJobs(SerializedJob $serializedJobs)
     {
-    	$this->entityManager = $entityManager;
+    	$this->serializedJobs[] = $serializedJobs;
     }
 
     /**
-     * {@InheritDoc}
+     * Get serializedJobs
      */
-    public function get()
+    public function getSerializedJobs()
     {
-    	$serializedJob = $this->serializedJobs->last();
-    	if ($serializedJob) {
-    		$this->serializedJobs->removeElement($serializedJob);
-    		$this->entityManager->remove($serializedJob);
-
-    		$this->entityManager->flush();
-
-    		return unserialize($serializedJob->getData());
-    	}
-    }
-
-    /**
-     * {@InheritDoc}
-     */
-    public function add(JobInterface $job)
-    {
-    	$serializedJob = new SerializedJob();
-    	$serializedJob->setData(serialize($job));
-    	$serializedJob->setQueue($this);
-
-    	$this->serializedJobs->add($serializedJob);
-    	$this->entityManager->persist($serializedJob);
-
-    	$this->entityManager->flush();
+    	return $this->serializedJobs;
     }
 }

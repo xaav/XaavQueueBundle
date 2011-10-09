@@ -37,7 +37,7 @@ class SerializedJob
 	/**
 	 * Set Job Queue
 	 */
-	public function setQueue(Queue $queue)
+	public function setQueue(Queue $queue = null)
 	{
 		$this->queue = $queue;
 	}

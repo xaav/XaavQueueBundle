@@ -20,19 +20,17 @@ class ProcessQueueCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-    	$processor = $this->getContainer()
-    		->get('xaav.queue.processor');
+    	$manager = $this->getContainer()
+    		->get('xaav.queue.manager');
 
-    	$queueName = $input->getArgument('name');
+    	$queue = $manager->get($input->getArgument('name'));
 
     	$output->writeln('Processing Queue, press Ctrl+C to stop');
 
-    	while (true) {
-    		$output->writeln('Checking for jobs...');
-    		while (!$processor->process($queueName)) {
-    			$output->writeln('Processed Job');
+    	while ($job = $queue->get()) {
+    		if ($job) {
+    			$job->process();
     		}
-    		$output->writeln('Sleeping for three seconds...');
     		sleep(3);
     	}
     }

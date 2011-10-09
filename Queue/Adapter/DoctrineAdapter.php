@@ -2,6 +2,8 @@
 
 namespace Xaav\QueueBundle\Queue\Adapter;
 
+use Xaav\QueueBundle\Entity\SerializedJob;
+
 use Xaav\QueueBundle\Entity\Queue;
 
 class DoctrineAdapter implements QueueAdapterInterface
@@ -14,23 +16,53 @@ class DoctrineAdapter implements QueueAdapterInterface
 		$this->entityManager = $container->get('doctrine')->getEntityManager();
 	}
 
+	/**
+	 * @return Queue
+	 */
+	protected function getQueue($name)
+	{
+		$queue = $this->entityManager
+			->getRepository('XaavQueueBundle:Queue')
+			->findOneByName($name);
+
+		if (!$queue) {
+
+			$queue = new Queue();
+			$queue->setName($name);
+
+			$this->entityManager->persist($queue);
+		}
+
+		if ($queue->getSerializedJobs()->count() == 0) {
+			$this->entityManager->refresh($queue);
+		}
+
+		return $queue;
+	}
+
     public function get($name)
     {
-        $queue = $this->entityManager
-                       ->getRepository('XaavQueueBundle:Queue')
-                       ->findOneByName($name);
+    	$queue = $this->getQueue($name);
 
-        if(!$queue) {
+    	$job = $queue->getSerializedJobs()->last();
+    	$job->setQueue();
 
-            $queue = new Queue();
-            $queue->setName($name);
+    	$this->entityManager->remove($job);
+    	$this->entityManager->flush();
 
-            $this->entityManager->persist($queue);
-        }
+        return $job->getData();
+    }
 
-        $this->entityManager->refresh($queue);
-        $queue->setEntityManager($this->entityManager);
+    public function add($name, $job)
+    {
+    	$queue = $this->getQueue($name);
 
-        return $queue;
+    	$job = new SerializedJob();
+    	$job->setData($job);
+
+    	$queue->addSerializedJobs($job);
+    	$this->entityManager->persist($job);
+
+    	$this->entityManager->flush();
     }
 }
