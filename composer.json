@@ -3,7 +3,7 @@
   "description": "Job Queue for Symfony2",
   "keywords": ["jobqueue","queue"],
   "homepage": "http://github.com/xaav/xaavqueuebundle",
-  "version": "0.9",
+  "version": "1.0",
   "license": "OpenLicense",
   "authors": [
     {
