@@ -1,6 +1,6 @@
 <?php
 
-namespace Xaav\QueueBundle;
+namespace Xaav\QueueBundle; 
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 

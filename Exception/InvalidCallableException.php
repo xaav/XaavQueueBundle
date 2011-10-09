@@ -1,6 +1,6 @@
 <?php
 
-namespace Xaav\QueueBundle\Exception;
+namespace Xaav\QueueBundle\Exception; 
 
 class InvalidCallableException extends \RuntimeException
 {
