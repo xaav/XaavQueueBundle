@@ -1,4 +1,4 @@
 services:
   xaav.queue.processor:
     class: Xaav\QueueBundle\Queue\QueueProcessor
-    arguments: [ @xaav.queue.adapter ]
+    arguments: [ @xaav.queue.adapter, @service_container ]

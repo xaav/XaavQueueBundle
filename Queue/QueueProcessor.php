@@ -3,15 +3,18 @@
 namespace Xaav\QueueBundle\Queue;
 
 use Xaav\QueueBundle\Queue\Adapter\QueueAdapterInterface;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class QueueProcessor implements QueueProcessorInterface
 {
     protected $adapter;
-    protected $cache;
+    protected $container;
 
-    public function __construct(QueueAdapterInterface $adapter)
+    public function __construct(QueueAdapterInterface $adapter, ContainerInterface $container)
     {
         $this->adapter = $adapter;
+        $this->container = $container;
     }
 
     /**
@@ -24,6 +27,10 @@ class QueueProcessor implements QueueProcessorInterface
 
         if($job) {
             //Job exists
+
+        	if ($job instanceof ContainerAwareInterface) {
+        		$job->setContainer($this->container);
+        	}
 
             if(!$job->process()) {
                 //Job is not done!
