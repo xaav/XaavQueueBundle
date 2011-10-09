@@ -2,12 +2,14 @@
 
 namespace Xaav\QueueBundle\Queue;
 
+use Xaav\QueueBundle\Queue\Adapter\QueueAdapterInterface;
+
 interface QueueProcessorInterface
 {
     /**
      * Constructor.
      */
-    public function __construct( $provider);
+    public function __construct(QueueAdapterInterface $adapter);
 
     /**
      * Processes the specified queue.
