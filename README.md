@@ -37,8 +37,7 @@ contribute something to this, we might get a decent Job Queue Bundle for everyon
 
 ## License ##
 
-This work is released under the [XaavNetwork OpenLicense][4]. Don't worry, the license allows you to re-license this work
-under the GPL or MIT, for those of you who refuse to use someone else's work just because it is under another license.
+This work is released into the public domain.
 
 **See [The wiki][1] for more details**
 
