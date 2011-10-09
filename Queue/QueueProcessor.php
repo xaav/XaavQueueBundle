@@ -19,9 +19,7 @@ class QueueProcessor implements QueueProcessorInterface
      */
     public function process($queueName)
     {
-        if(!$queue = $this->cache[$queueName]) {
-            $queue = $this->cache[$queueName] = $this->adapter->get($queueName);
-        }
+        $queue = $this->adapter->get($queueName);
         $job = $queue->get();
 
         if($job) {

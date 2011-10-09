@@ -83,7 +83,10 @@ class Queue implements QueueInterface
     {
     	$serializedJob = $this->serializedJobs->last();
     	if ($serializedJob) {
+    		$this->serializedJobs->removeElement($serializedJob);
     		$this->entityManager->remove($serializedJob);
+
+    		$this->entityManager->flush();
 
     		return unserialize($serializedJob->getData());
     	}
@@ -100,5 +103,7 @@ class Queue implements QueueInterface
 
     	$this->serializedJobs->add($serializedJob);
     	$this->entityManager->persist($serializedJob);
+
+    	$this->entityManager->flush();
     }
 }

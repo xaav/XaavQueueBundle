@@ -28,6 +28,7 @@ class DoctrineAdapter implements QueueAdapterInterface
             $this->entityManager->persist($queue);
         }
 
+        $this->entityManager->refresh($queue);
         $queue->setEntityManager($this->entityManager);
 
         return $queue;
