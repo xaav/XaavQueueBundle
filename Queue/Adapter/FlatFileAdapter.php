@@ -15,6 +15,6 @@ class FlatFileProvider implements QueueAdapterInterface
 
 	public function get($name)
 	{
-		return new Queue($this->source.'/'.$name.'.jobqueue');
+		return new Queue($this->source.'/'.$name.'.queue');
 	}
 }
