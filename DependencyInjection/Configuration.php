@@ -22,10 +22,13 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
         	->children()
-        		->scalarNode('driver')
-        			->cannotBeOverwritten()
-        			->isRequired()
-        			->cannotBeEmpty()
+        		->arrayNode('adapter')
+        			->children()
+        				->scalarNode('class')
+        					->end()
+        				->arrayNode('options')
+        					->end()
+        				->end()
         			->end()
         		->end();
 

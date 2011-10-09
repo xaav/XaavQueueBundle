@@ -1,11 +1,10 @@
 <?php
 
-namespace Xaav\QueueBundle\JobQueue\Provider;
+namespace Xaav\QueueBundle\Queue\Adapter;
 
-use Doctrine\ORM\EntityManager;
 use Xaav\QueueBundle\Entity\JobQueue;
 
-class DoctrineProvider implements JobQueueProviderInterface
+class DoctrineAdapter implements QueueAdapterInterface
 {
     protected $entityManager;
 
@@ -15,10 +14,10 @@ class DoctrineProvider implements JobQueueProviderInterface
 		$this->entityManager = $container->get('doctrine')->getEntityManager();
 	}
 
-    public function getJobQueueByName($name)
+    public function get($name)
     {
         $queue = $this->entityManager
-                       ->getRepository('XaavQueueBundle:JobQueue')
+                       ->getRepository('XaavQueueBundle:Queue')
                        ->findOneByName($name);
 
         if(!$queue) {

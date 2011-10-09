@@ -19,9 +19,10 @@ class DoctrineJobQueue implements JobQueueInterface
 	 */
 	protected $entityManager;
 
-	public function setEntityManager(EntityManager $entityManager)
+	public function __construct(array $options)
 	{
-		$this->entityManager = $entityManager;
+		$container = $options['service_container'];
+		$this->entityManager = $container->get('doctrine')->getEntityManager();
 	}
 
     public function getJobFromQueue()

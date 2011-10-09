@@ -1,4 +1,4 @@
 services:
-  xaav.jobqueue.processor:
+  xaav.queue.processor:
     class: Xaav\QueueBundle\JobQueue\JobQueueProcessor
-    arguments: [ @xaav.jobqueue.provider ]
+    arguments: [ @xaav.queue.adapter ]
