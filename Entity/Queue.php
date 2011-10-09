@@ -96,7 +96,7 @@ class Queue implements QueueInterface
     {
     	$serializedJob = new SerializedJob();
     	$serializedJob->setData(serialize($job));
-    	$serializedJob->setJobQueue($this);
+    	$serializedJob->setQueue($this);
 
     	$this->serializedJobs->add($serializedJob);
     }

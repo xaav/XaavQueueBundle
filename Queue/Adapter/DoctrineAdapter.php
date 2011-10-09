@@ -2,7 +2,7 @@
 
 namespace Xaav\QueueBundle\Queue\Adapter;
 
-use Xaav\QueueBundle\Entity\JobQueue;
+use Xaav\QueueBundle\Entity\Queue;
 
 class DoctrineAdapter implements QueueAdapterInterface
 {
@@ -22,7 +22,7 @@ class DoctrineAdapter implements QueueAdapterInterface
 
         if(!$queue) {
 
-            $queue = new JobQueue();
+            $queue = new Queue();
             $queue->setName($name);
 
             $this->entityManager->persist($queue);

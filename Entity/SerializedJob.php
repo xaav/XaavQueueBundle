@@ -24,22 +24,22 @@ class SerializedJob
 	/**
 	 * @ORM\ManyToOne(targetEntity="Queue")
 	 */
-	protected $jobQueue;
+	protected $queue;
 
 	/**
 	 * Get Job Queue
 	 */
-	public function getJobQueue()
+	public function getQueue()
 	{
-		return $this->jobQueue;
+		return $this->queue;
 	}
 
 	/**
 	 * Set Job Queue
 	 */
-	public function setJobQueue(JobQueue $jobQueue)
+	public function setQueue(Queue $queue)
 	{
-		$this->jobQueue = $jobQueue;
+		$this->queue = $queue;
 	}
 
 	/**
