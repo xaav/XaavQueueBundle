@@ -23,6 +23,6 @@ class QueueManager
 	 */
 	public function get($queue)
 	{
-		return new Queue($this->adapter, $this->container, $name);
+		return new Queue($this->adapter, $this->container, $queue);
 	}
 }

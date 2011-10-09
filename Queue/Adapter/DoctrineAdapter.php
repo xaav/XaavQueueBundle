@@ -31,9 +31,7 @@ class DoctrineAdapter implements QueueAdapterInterface
 			$queue->setName($name);
 
 			$this->entityManager->persist($queue);
-		}
-
-		if ($queue->getSerializedJobs()->count() == 0) {
+		}elseif ($queue->getSerializedJobs()->count() == 0) {
 			$this->entityManager->refresh($queue);
 		}
 
@@ -44,25 +42,24 @@ class DoctrineAdapter implements QueueAdapterInterface
     {
     	$queue = $this->getQueue($name);
 
-    	$job = $queue->getSerializedJobs()->last();
-    	$job->setQueue();
+    	$serializedJob = $queue->getSerializedJobs()->last();
+    	$serializedJob->setQueue();
 
-    	$this->entityManager->remove($job);
+    	$this->entityManager->remove($serializedJob);
     	$this->entityManager->flush();
 
-        return $job->getData();
+        return $serializedJob->getData();
     }
 
     public function add($name, $job)
     {
     	$queue = $this->getQueue($name);
 
-    	$job = new SerializedJob();
-    	$job->setData($job);
+    	$serializedJob = new SerializedJob();
+    	$serializedJob->setData($job);
+    	$serializedJob->setQueue($queue);
 
-    	$queue->addSerializedJobs($job);
-    	$this->entityManager->persist($job);
-
+    	$this->entityManager->persist($serializedJob);
     	$this->entityManager->flush();
     }
 }
