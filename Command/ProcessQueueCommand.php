@@ -7,7 +7,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 
-class InstallSQLBuddyCommand extends ContainerAwareCommand
+class ProcessQueueCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
