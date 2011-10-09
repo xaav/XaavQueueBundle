@@ -2,29 +2,31 @@
 
 namespace Xaav\QueueBundle\JobQueue;
 
+use Xaav\QueueBundle\Queue\Adapter\QueueAdapterInterface;
+
 class QueueProcessor implements QueueProcessorInterface
 {
-    protected $provider;
+    protected $adapter;
     protected $cache;
 
-    public function __construct(JobQueueProviderInterface $provider)
+    public function __construct(QueueAdapterInterface $adapter)
     {
-        $this->provider = $provider;
+        $this->adapter = $adapter;
     }
 
     public function process($queueName)
     {
-        if(!$jobqueue = $this->cache[$queueName]) {
-            $jobqueue = $this->cache[$queueName] = $this->provider->getJobQueueByName($queueName);
+        if(!$queue = $this->cache[$queueName]) {
+            $queue = $this->cache[$queueName] = $this->adapter->get($queueName);
         }
-        $job = $jobqueue->getJobFromQueue();
+        $job = $queue->get();
 
         if($job) {
             //Job exists
 
-            if(!$job->pass()) {
+            if(!$job->process()) {
                 //Job is not done!
-                $jobqueue->addJobToQueue($job);
+                $queue->add($job);
             }
 
             //Could be another job
