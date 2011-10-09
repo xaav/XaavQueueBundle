@@ -1,6 +1,6 @@
 <?php
 
-namespace Xaav\QueueBundle\JobQueue;
+namespace Xaav\QueueBundle\Queue;
 
 use Xaav\QueueBundle\Queue\Adapter\QueueAdapterInterface;
 
