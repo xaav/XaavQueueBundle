@@ -25,7 +25,7 @@ class Queue implements QueueInterface
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="SerializedJob", mappedBy="queue",cascade={"persist", "all"})
+     * @ORM\OneToMany(targetEntity="SerializedJob", mappedBy="queue")
      */
     protected $serializedJobs;
 
@@ -99,5 +99,6 @@ class Queue implements QueueInterface
     	$serializedJob->setQueue($this);
 
     	$this->serializedJobs->add($serializedJob);
+    	$this->entityManager->persist($serializedJob);
     }
 }

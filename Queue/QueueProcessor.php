@@ -14,6 +14,9 @@ class QueueProcessor implements QueueProcessorInterface
         $this->adapter = $adapter;
     }
 
+    /**
+     * @return boolean True if there are no more jobs
+     */
     public function process($queueName)
     {
         if(!$queue = $this->cache[$queueName]) {
