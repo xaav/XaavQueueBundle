@@ -43,12 +43,14 @@ class DoctrineAdapter implements QueueAdapterInterface
     	$queue = $this->getQueue($name);
 
     	$serializedJob = $queue->getSerializedJobs()->last();
-    	$serializedJob->setQueue();
+    	if ($serializedJob) {
+	    	$serializedJob->setQueue();
 
-    	$this->entityManager->remove($serializedJob);
-    	$this->entityManager->flush();
+	    	$this->entityManager->remove($serializedJob);
+	    	$this->entityManager->flush();
 
-        return $serializedJob->getData();
+	        return $serializedJob->getData();
+    	}
     }
 
     public function add($name, $job)
