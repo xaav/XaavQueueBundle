@@ -27,10 +27,13 @@ class ProcessQueueCommand extends ContainerAwareCommand
 
     	$output->writeln('Processing Queue, press Ctrl+C to stop');
 
-    	while ($job = $queue->get()) {
-    		if ($job) {
+    	while (true) {
+    		$output->writeln('Checking for jobs...');
+    		while ($job = $queue->get()) {
     			$job->process();
+    			$output->writeln('Processed Job');
     		}
+    		$output->writeln('No jobs found, sleeping three seconds');
     		sleep(3);
     	}
     }
