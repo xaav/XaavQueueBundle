@@ -30,7 +30,11 @@ class ProcessQueueCommand extends ContainerAwareCommand
     	while (true) {
     		$output->writeln('Checking for jobs...');
     		while ($job = $queue->get()) {
-    			$job->process();
+    			try {
+    				$job->process();
+    			} catch (\Exception $ex) {
+    				$output->writeln($ex->getTrace());
+    			}
     			$output->writeln('Processed Job');
     		}
     		$output->writeln('No jobs found, sleeping three seconds');
