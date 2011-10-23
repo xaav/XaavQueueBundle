@@ -17,6 +17,8 @@ The use of a batch queue gives these benefits:
 * avoids idling the compute resources without minute-by-minute human supervision
 * allows around-the-clock high utilization of expensive computing resources
 
+Please see [the wiki][1] for more information and/or documentation. 
+
 ## Installation ##
 
 Add the following to your `deps` file:
@@ -28,20 +30,28 @@ Add the following to your `deps` file:
 Run the vendors script:
 
     php bin/vendors install
+    
+Please see [here][5] for a more detailed guide.
 
 ## Contributing ##
 
-If you believe this bundle helped you in some way, please send a pull request, as right now I am the only one maintaining 
-this bundle. If you aren't sure what to do, just look at some of the [issues][3], and fix the ones you can. If we all 
-contribute something to this, we might get a decent Job Queue Bundle for everyone!
+The following contributions are welcome:
+
+- Pull Requests
+    - Adding adapters
+    - Adding ways to empty the queue
+- Reporting Issues
+    - Reporting of bugs/crashes
+    - Suggesting new features
+- Improvement of Wiki Pages
+
+If this bundle has been useful to you, please consider making one or more of the above contributions. 
 
 ## License ##
 
-This work is released into the public domain.
-
-**See [The wiki][1] for more details**
+This work is released into the public domain and is also availiable under the [xaavnetwork openlicense][4].
 
 [1]: https://github.com/xaav/XaavQueueBundle/wiki 
 [2]: http://en.wikipedia.org/wiki/Job_queue
-[3]: https://github.com/xaav/XaavQueueBundle/issues
 [4]: http://xaav.tk/openlicense
+[5]: https://github.com/xaav/XaavQueueBundle/wiki/Installation
