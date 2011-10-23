@@ -53,5 +53,5 @@ This work is released into the public domain and is also availiable under the [x
 
 [1]: https://github.com/xaav/XaavQueueBundle/wiki 
 [2]: http://en.wikipedia.org/wiki/Job_queue
-[4]: http://xaav.tk/openlicense
+[4]: http://xaav.tk/OpenLicense
 [5]: https://github.com/xaav/XaavQueueBundle/wiki/Installation
